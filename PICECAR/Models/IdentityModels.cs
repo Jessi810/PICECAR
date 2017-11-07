@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace PICECAR.Models
 {
@@ -16,18 +17,44 @@ namespace PICECAR.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+        public virtual PersonalInfo PersonalInfos { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<PersonalInfo> PersonalInfos { get; set; }
+
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("PICEDatabase", throwIfV1Schema: false)
         {
         }
 
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+
+            modelBuilder.Entity<IdentityUser>()
+                .ToTable("User");
+
+            modelBuilder.Entity<IdentityRole>()
+                .ToTable("Role");
+
+            modelBuilder.Entity<IdentityUserRole>()
+                .HasKey(r => new { r.UserId, r.RoleId })
+                .ToTable("UserRole");
+
+            modelBuilder.Entity<IdentityUserLogin>()
+                .HasKey(l => new { l.LoginProvider, l.ProviderKey, l.UserId })
+                .ToTable("UserLogin");
+
+            modelBuilder.Entity<IdentityUserClaim>()
+                .ToTable("UserClaim");
         }
     }
 }
