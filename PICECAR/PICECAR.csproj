@@ -249,6 +249,8 @@
     <Content Include="Views\Profile\Membership.cshtml" />
     <Content Include="Views\Profile\Profession.cshtml" />
     <Content Include="Views\Profile\Education.cshtml" />
+    <Content Include="Views\Profile\_Layout.cshtml" />
+    <Content Include="Views\Profile\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
