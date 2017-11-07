@@ -283,6 +283,38 @@ namespace PICECAR.Controllers
             return RedirectToAction("Education", "Profile");
         }
 
+        public ActionResult AddEducation()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> AddEducation([Bind(Include = "EducationId,Course,School,YearGraduated")] Education model)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+            ApplicationUser user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            if (user == null)
+            {
+                // TODO: Change to bad request
+                return View();
+            }
+            var education = new Education
+            {
+                User = user,
+                Course = model.Course,
+                School = model.School,
+                YearGraduated = model.YearGraduated
+            };
+            
+            db.Educations.Add(education);
+            await db.SaveChangesAsync();
+            return RedirectToAction("Education", "Profile");
+        }
+
         // GET: Profile
         public async Task<ActionResult> Index()
         {
