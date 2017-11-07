@@ -304,7 +304,7 @@ namespace PICECAR.Controllers
             }
             var education = new Education
             {
-                User = user,
+                Id = user.Id,
                 Course = model.Course,
                 School = model.School,
                 YearGraduated = model.YearGraduated
