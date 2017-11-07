@@ -138,6 +138,52 @@ namespace PICECAR.Controllers
             return RedirectToAction("Index", "Profile");
         }
 
+        public ActionResult Profession()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Profession(Profession model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            ApplicationUser user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            if (user == null)
+            {
+                return View(model);
+            }
+
+            db.Professions.Add(new Profession
+            {
+                Id = user.Id,
+                EmploymentSector = model.EmploymentSector,
+                OtherEmploymentSector = model.OtherEmploymentSector,
+                AreaOfPractice = model.AreaOfPractice,
+                OtherAreaOfPractice = model.OtherAreaOfPractice,
+                CurrentCompany = model.CurrentCompany,
+                EmployeeType = model.EmployeeType,
+                CurrentJobPosition = model.CurrentJobPosition,
+                WorkAddress = model.WorkAddress,
+                CompanyTelNum = model.CompanyTelNum,
+                CompanyFaxNum = model.CompanyFaxNum,
+                CompanyEmail = model.CompanyEmail
+            });
+            Profession profession = await db.Professions.FindAsync(user.Id);
+            if (profession == null)
+            {
+                // TODO: Change to bad request
+                return View(model);
+            }
+            db.Entry(profession).State = EntityState.Modified;
+            await db.SaveChangesAsync();
+
+            return RedirectToAction("Index", "Profile");
+        }
+
         // GET: Profile
         public async Task<ActionResult> Index()
         {
