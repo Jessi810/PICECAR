@@ -8,12 +8,95 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PICECAR.Models;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity;
 
 namespace PICECAR.Controllers
 {
+    [Authorize]
     public class ProfileController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private ApplicationSignInManager _signInManager;
+        private ApplicationUserManager _userManager;
+
+        public ProfileController()
+        {
+        }
+
+        public ProfileController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        {
+            UserManager = userManager;
+            SignInManager = signInManager;
+        }
+
+        public ApplicationSignInManager SignInManager
+        {
+            get
+            {
+                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+            }
+            private set
+            {
+                _signInManager = value;
+            }
+        }
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
+
+        public ActionResult PersonalInfo()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> PersonalInfo(PersonalInfo model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            ApplicationUser user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            if (user == null)
+            {
+                return View(model);
+            }
+
+            db.PersonalInfos.Add(new PersonalInfo
+            {
+                Id = user.Id,
+                FirstName = model.FirstName,
+                MiddleName = model.MiddleName,
+                LastName = model.LastName,
+                BirthDate = model.BirthDate,
+                PlaceOfBirth = model.PlaceOfBirth,
+                HomeAddress = model.HomeAddress,
+                BaguioAddress = model.BaguioAddress,
+                CellNum = model.CellNum,
+                TelNum = model.TelNum
+            });
+            PersonalInfo personalInfo = await db.PersonalInfos.FindAsync(user.Id);
+            if (personalInfo == null)
+            {
+                // TODO: Change to bad request
+                return View(model);
+            }
+            db.Entry(personalInfo).State = EntityState.Modified;
+            await db.SaveChangesAsync();
+
+            return RedirectToAction("Index", "Profile");
+        }
 
         // GET: Profile
         public async Task<ActionResult> Index()
