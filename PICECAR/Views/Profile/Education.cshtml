@@ -24,8 +24,8 @@
                 <td>@Html.DisplayFor(modelItem => item.School)</td>
                 <td>@Html.DisplayFor(modelItem => item.YearGraduated)</td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.EducationId }, new { @class = "btn btn-xs btn-default" })
-                    @Html.ActionLink("Delete", "Delete", new { id = item.EducationId }, new { @class = "btn btn-xs btn-danger" })
+                    @Html.ActionLink("Edit", "EditEducation", "Profile", new { id = item.EducationId }, new { @class = "btn btn-xs btn-default" })
+                    @Html.ActionLink("Delete", "DeleteEducation", "Profile", new { id = item.EducationId }, new { @class = "btn btn-xs btn-danger" })
                 </td>
             </tr>
         }

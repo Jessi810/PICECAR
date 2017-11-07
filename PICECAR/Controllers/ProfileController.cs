@@ -244,6 +244,45 @@ namespace PICECAR.Controllers
             return RedirectToAction("Index", "Profile");
         }
 
+        public async Task<ActionResult> EditEducation(int id)
+        {
+            // TODO: Add validation
+            var education = await db.Educations.FindAsync(id);
+            return View(education);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditEducation([Bind(Include = "EducationId,Course,School,YearGraduated")] Education model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            db.Entry(model).State = EntityState.Modified;
+            await db.SaveChangesAsync();
+            return RedirectToAction("Education", "Profile");
+        }
+
+        //public async Task<ActionResult> DeleteEducation(int id)
+        //{
+        //    // TODO: Add validation
+        //    var education = await db.Educations.FindAsync(id);
+        //    return View(education);
+        //}
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteEducation(int id)
+        {
+            // TODO: Add validation
+            Education education = await db.Educations.FindAsync(id);
+            db.Educations.Remove(education);
+            await db.SaveChangesAsync();
+            return RedirectToAction("Education", "Profile");
+        }
+
         // GET: Profile
         public async Task<ActionResult> Index()
         {
