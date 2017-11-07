@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity.ModelConfiguration.Conventions;
+using System.Collections.Generic;
 
 namespace PICECAR.Models
 {
@@ -21,6 +22,7 @@ namespace PICECAR.Models
         public virtual PersonalInfo PersonalInfo { get; set; }
         public virtual MembershipInfo MembershipInfo { get; set; }
         public virtual Profession Profession { get; set; }
+        public virtual IList<Education> Educations { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -28,6 +30,7 @@ namespace PICECAR.Models
         public DbSet<PersonalInfo> PersonalInfos { get; set; }
         public DbSet<MembershipInfo> MembershipInfos { get; set; }
         public DbSet<Profession> Professions { get; set; }
+        public DbSet<Education> Educations { get; set; }
 
         public ApplicationDbContext()
             : base("PICEDatabase", throwIfV1Schema: false)
