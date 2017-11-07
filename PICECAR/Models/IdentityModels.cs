@@ -20,12 +20,14 @@ namespace PICECAR.Models
 
         public virtual PersonalInfo PersonalInfo { get; set; }
         public virtual MembershipInfo MembershipInfo { get; set; }
+        public virtual Profession Profession { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<PersonalInfo> PersonalInfos { get; set; }
         public DbSet<MembershipInfo> MembershipInfos { get; set; }
+        public DbSet<Profession> Professions { get; set; }
 
         public ApplicationDbContext()
             : base("PICEDatabase", throwIfV1Schema: false)
