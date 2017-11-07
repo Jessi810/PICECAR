@@ -13,14 +13,19 @@ namespace PICECAR.Models
         [Key, ForeignKey("User")]
         public string Id { get; set; }
 
+        [Display(Name = "PRC #")]
         public string PrcNum { get; set; }
 
+        [Display(Name = "PRC Date Issued")]
         public DateTime? PrcDateIssued { get; set; }
 
+        [Display(Name = "Membership Type")]
         public string TypeOfMembership { get; set; }
 
+        [Display(Name = "Membership #")]
         public string MembershipNum { get; set; }
 
+        [Display(Name = "Date of Membership")]
         public DateTime? DateOfMembership { get; set; }
 
 
