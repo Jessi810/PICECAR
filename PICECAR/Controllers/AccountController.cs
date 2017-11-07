@@ -17,6 +17,7 @@ namespace PICECAR.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext db;
 
         public AccountController()
         {
@@ -155,7 +156,21 @@ namespace PICECAR.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    using (db = new ApplicationDbContext())
+                    {
+                        db.PersonalInfos.Add(new PersonalInfo()
+                        {
+                            Id = user.Id,
+                            FirstName = model.FirstName,
+                            MiddleName = model.MiddleName,
+                            LastName = model.LastName
+                            // TODO: Add the remaining properties
+                        });
+
+                        await db.SaveChangesAsync();
+                    }
+
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                     
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
