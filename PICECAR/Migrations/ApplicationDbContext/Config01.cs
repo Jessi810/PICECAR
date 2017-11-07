@@ -74,8 +74,20 @@ namespace PICECAR.Migrations.ApplicationDbContext
                         MiddleName = "Middle",
                         LastName = "Last"
                     };
-
                     context.PersonalInfos.AddOrUpdate(pInfo);
+
+                    var mInfo = new MembershipInfo
+                    {
+                        Id = user.Id
+                    };
+                    context.MembershipInfos.AddOrUpdate(mInfo);
+
+                    var profession = new Profession
+                    {
+                        Id = user.Id
+                    };
+                    context.Professions.AddOrUpdate(profession);
+
                     context.SaveChanges();
                 }
             }
