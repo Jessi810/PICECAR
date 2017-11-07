@@ -98,6 +98,46 @@ namespace PICECAR.Controllers
             return RedirectToAction("Index", "Profile");
         }
 
+        public ActionResult Membership()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Membership(MembershipInfo model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            ApplicationUser user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            if (user == null)
+            {
+                return View(model);
+            }
+
+            db.MembershipInfos.Add(new MembershipInfo
+            {
+                Id = user.Id,
+                PrcNum = model.PrcNum,
+                PrcDateIssued = model.PrcDateIssued,
+                TypeOfMembership = model.TypeOfMembership,
+                MembershipNum = model.MembershipNum,
+                DateOfMembership = model.DateOfMembership
+            });
+            MembershipInfo membershipInfo = await db.MembershipInfos.FindAsync(user.Id);
+            if (membershipInfo == null)
+            {
+                // TODO: Change to bad request
+                return View(model);
+            }
+            db.Entry(membershipInfo).State = EntityState.Modified;
+            await db.SaveChangesAsync();
+
+            return RedirectToAction("Index", "Profile");
+        }
+
         // GET: Profile
         public async Task<ActionResult> Index()
         {
