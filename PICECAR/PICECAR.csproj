@@ -182,6 +182,7 @@
     <Compile Include="Models\MembershipInfo.cs" />
     <Compile Include="Models\PersonalInfo.cs" />
     <Compile Include="Models\Profession.cs" />
+    <Compile Include="Models\Transact.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
