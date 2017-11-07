@@ -1,0 +1,45 @@
+﻿@model IEnumerable<PICECAR.Models.Education>
+
+@{
+    ViewBag.Title = "Education";
+}
+
+<h2>Education</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Course)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.School)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.YearGraduated)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Course)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.School)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.YearGraduated)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.EducationId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.EducationId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.EducationId })
+        </td>
+    </tr>
+}
+
+</table>
