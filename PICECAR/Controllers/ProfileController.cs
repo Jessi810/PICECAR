@@ -54,9 +54,14 @@ namespace PICECAR.Controllers
             }
         }
 
-        public ActionResult PersonalInfo()
+        public async Task<ActionResult> PersonalInfo()
         {
-            return View();
+            PersonalInfo personalInfo = await db.PersonalInfos.FindAsync(User.Identity.GetUserId());
+            if (personalInfo == null)
+            {
+                return HttpNotFound();
+            }
+            return View(personalInfo);
         }
 
         [HttpPost]
@@ -84,7 +89,8 @@ namespace PICECAR.Controllers
                 HomeAddress = model.HomeAddress,
                 BaguioAddress = model.BaguioAddress,
                 CellNum = model.CellNum,
-                TelNum = model.TelNum
+                TelNum = model.TelNum,
+                Email = model.Email
             });
             PersonalInfo personalInfo = await db.PersonalInfos.FindAsync(user.Id);
             if (personalInfo == null)
@@ -94,6 +100,15 @@ namespace PICECAR.Controllers
             }
             db.Entry(personalInfo).State = EntityState.Modified;
             await db.SaveChangesAsync();
+
+            user.Email = model.Email;
+            user.UserName = model.Email;
+            var result = await UserManager.UpdateAsync(user);
+            if (!result.Succeeded)
+            {
+                // TODO: Change to bad request
+                return View();
+            }
 
             return RedirectToAction("Index", "Profile");
         }

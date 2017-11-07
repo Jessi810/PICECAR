@@ -42,6 +42,9 @@ namespace PICECAR.Models
         [Display(Name = "Cellphone Number")]
         public string CellNum { get; set; }
 
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
 
         public virtual ApplicationUser User { get; set; }
     }
