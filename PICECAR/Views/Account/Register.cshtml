@@ -3,56 +3,58 @@
     ViewBag.Title = "Register";
 }
 
-<h2>@ViewBag.Title.</h2>
-
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-    <h4>Create a new account.</h4>
+<div class="row">
+    <h2>Register</h2>
     <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(m => m.FirstName, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
+</div>
+
+<div class="row">
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group col-xs-12 col-md-4">
+            @Html.LabelFor(m => m.FirstName, new { @class = "control-label" }) <span class="label label-default">Required</span>
             @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.MiddleName, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
+
+        <div class="form-group col-xs-12 col-md-4">
+            @Html.LabelFor(m => m.MiddleName, new { @class = "control-label" }) <span class="label label-default">Required</span>
             @Html.TextBoxFor(m => m.MiddleName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.MiddleName, "", new { @class = "text-danger" })
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.LastName, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
+
+        <div class="form-group col-xs-12 col-md-4">
+            @Html.LabelFor(m => m.LastName, new { @class = "control-label" }) <span class="label label-default">Required</span>
             @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
+
+        <div class="form-group col-xs-12 col-md-12">
+            @Html.LabelFor(m => m.Email, new { @class = "control-label" }) <span class="label label-default">Required</span>
             @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
+
+        <div class="form-group col-xs-12 col-md-4">
+            @Html.LabelFor(m => m.Password, new { @class = "control-label" }) <span class="label label-default">Required</span>
             @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
+
+        <div class="form-group col-xs-12 col-md-4">
+            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "control-label" }) <span class="label label-default">Required</span>
             @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
         </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
+
+        <div class="form-group col-xs-12 col-md-12">
+            <br />
             <input type="submit" class="btn btn-default" value="Register" />
         </div>
-    </div>
-}
+    }
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
