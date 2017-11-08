@@ -335,7 +335,7 @@ namespace PICECAR.Controllers
             {
                 PersonalInfo = db.PersonalInfos.Find(userId),
                 MembershipInfo = db.MembershipInfos.Find(userId),
-                Education = db.Educations.Find(userId),
+                Education = db.Educations.Where(u => u.Id == userId).ToList(),
                 Profession = db.Professions.Find(userId)
             };
 

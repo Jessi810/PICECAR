@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PICECAR.Models.PersonalInfo>
+﻿@model PICECAR.Models.Profile
 
 @{
     ViewBag.Title = "Index";
@@ -6,12 +6,131 @@
 
 <br />
 <div class="panel panel-default">
-    <div class="panel-heading text-center">
+    @*<div class="panel-heading text-center">
         <h3 class="panel-title">Profile</h3>
-    </div>
+    </div>*@
 
     <div class="panel-body">
-        <br />
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Personal Info
+                @Html.ActionLink("Edit", "PersonalInfo", "Profile", null, new { @class = "btn btn-default btn-xs pull-right" })
+            </div>
+            <div class="panel-body">
+                <dl class="dl-horizontal">
+                    <dt>Full name</dt>
+                    <dd>@Model.PersonalInfo.FirstName @Model.PersonalInfo.MiddleName @Model.PersonalInfo.LastName</dd>
+
+                    <dt>Email</dt>
+                    <dd>@Model.PersonalInfo.Email</dd>
+
+                    <dt>Place of Birth</dt>
+                    <dd>@Model.PersonalInfo.PlaceOfBirth</dd>
+
+                    <dt>Birthdate</dt>
+                    <dd>@Model.PersonalInfo.BirthDate</dd>
+
+                    <dt>Home Address</dt>
+                    <dd>@Model.PersonalInfo.HomeAddress</dd>
+
+                    <dt>Baguio Address</dt>
+                    <dd>@Model.PersonalInfo.BaguioAddress</dd>
+
+                    <dt>Cellphone Number</dt>
+                    <dd>@Model.PersonalInfo.CellNum</dd>
+
+                    <dt>Telephone Number</dt>
+                    <dd>@Model.PersonalInfo.TelNum</dd>
+                </dl>
+            </div>
+        </div>
+
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Membership Info
+                @Html.ActionLink("Edit", "Membership", "Profile", null, new { @class = "btn btn-default btn-xs pull-right" })
+            </div>
+            <div class="panel-body">
+                <dl class="dl-horizontal">
+                    <dt>PRC #</dt>
+                    <dd>@Model.MembershipInfo.PrcNum</dd>
+
+                    <dt>PRC Date Issued</dt>
+                    <dd>@Model.MembershipInfo.PrcDateIssued</dd>
+
+                    <dt>Type of Membership</dt>
+                    <dd>@Model.MembershipInfo.TypeOfMembership</dd>
+
+                    <dt>Membership #</dt>
+                    <dd>@Model.MembershipInfo.MembershipNum</dd>
+
+                    <dt>Date of Membership</dt>
+                    <dd>@Model.MembershipInfo.DateOfMembership</dd>
+                </dl>
+            </div>
+        </div>
+
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Educational Background
+                @Html.ActionLink("Edit", "Education", "Profile", null, new { @class = "btn btn-default btn-xs pull-right" })
+            </div>
+            <div class="panel-body">
+                <dl class="dl-horizontal">
+                    <dt>Education</dt>
+                    @foreach (var item in Model.Education)
+                    {
+                        <dd>@item.Course, @item.School, @item.YearGraduated</dd>
+                    }
+                </dl>
+            </div>
+        </div>
+
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Professional Background
+                @Html.ActionLink("Edit", "Profession", "Profile", null, new { @class = "btn btn-default btn-xs pull-right" })
+            </div>
+            <div class="panel-body">
+                <dl class="dl-horizontal">
+                    <dt>Employment Sector</dt>
+                    <dd>@Model.Profession.EmploymentSector</dd>
+
+                    <dt>Area of Practice</dt>
+                    <dd>@Model.Profession.AreaOfPractice</dd>
+
+                    <dt>Current Company</dt>
+                    <dd>@Model.Profession.CurrentCompany</dd>
+
+                    <dt>Employee Type</dt>
+                    <dd>@Model.Profession.EmployeeType</dd>
+
+                    <dt>Current Job Position</dt>
+                    <dd>@Model.Profession.CurrentJobPosition</dd>
+
+                    <dt>Company / Work Address</dt>
+                    <dd>@Model.Profession.WorkAddress</dd>
+
+                    <dt>Company Telephone #</dt>
+                    <dd>@Model.Profession.CompanyTelNum</dd>
+
+                    <dt>Company Tele-fax</dt>
+                    <dd>@Model.Profession.CompanyFaxNum</dd>
+
+                    <dt>Company Email</dt>
+                    <dd>@Model.Profession.CompanyEmail</dd>
+                </dl>
+            </div>
+        </div>
 
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        $("#iInfoId").addClass("active");
+    </script>
+}
