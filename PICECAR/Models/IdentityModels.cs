@@ -24,8 +24,8 @@ namespace PICECAR.Models
         public virtual Profession Profession { get; set; }
         public virtual IList<Education> Educations { get; set; }
 
-        public virtual Transact.PaymentOfDues PaymentOfDue { get; set; }
-        public virtual Transact.Seminar Seminar { get; set; }
+        public virtual IList<Transact.PaymentOfDues> PaymentOfDue { get; set; }
+        public virtual IList<Transact.Seminar> Seminar { get; set; }
         public virtual Transact.MembershipStatus MembershipStatuses { get; set; }
         public virtual Transact.Chapter Chapters { get; set; }
     }

@@ -11,8 +11,8 @@ namespace PICECAR.Models
     {
         public class PaymentOfDues
         {
-            [Key, ForeignKey("User")]
-            public string Id { get; set; }
+            [Key]
+            public string PaymentOfDuesId { get; set; }
 
             public int? InclusiveYearFrom { get; set; }
 
@@ -26,14 +26,15 @@ namespace PICECAR.Models
 
             public string OrNum { get; set; }
 
-
+            [ForeignKey("User")]
+            public string Id { get; set; }
             public virtual ApplicationUser User { get; set; }
         }
 
         public class Seminar
         {
-            [Key, ForeignKey("User")]
-            public string Id { get; set; }
+            [Key]
+            public string SeminarId { get; set; }
 
             public string Code { get; set; }
 
@@ -49,7 +50,8 @@ namespace PICECAR.Models
 
             public int? CpdUnitsEarned { get; set; }
 
-
+            [ForeignKey("User")]
+            public string Id { get; set; }
             public virtual ApplicationUser User { get; set; }
         }
 
