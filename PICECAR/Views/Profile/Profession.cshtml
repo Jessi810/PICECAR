@@ -4,92 +4,158 @@
     ViewBag.Title = "Profession";
 }
 
-<div class="row">
-    <h2>Professional Background</h2>
-    <hr />
-</div>
+<br />
+<div class="panel panel-default">
+    <div class="panel-heading text-center">
+        <h3 class="panel-title">Professional Background</h3>
+    </div>
 
-<div class="row">
-    @using (Html.BeginForm("PersonalInfo", "Profile", FormMethod.Post, new { @class = "", role = "form" }))
-    {
-        @Html.AntiForgeryToken()
-        @Html.HiddenFor(model => model.Id)
+    <div class="panel-body">
+        <br />
 
-        <div class="form-group col-xs-12 col-md-4">
-            @Html.LabelFor(model => model.EmploymentSector, htmlAttributes: new { @class = "control-label" })
-            @Html.EditorFor(model => model.EmploymentSector, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.EmploymentSector, "", new { @class = "text-danger" })
-        </div>
+        @using (Html.BeginForm("Profession", "Profile", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.Id)
 
-        <div class="form-group col-xs-12 col-md-8">
-            @Html.LabelFor(model => model.OtherEmploymentSector, htmlAttributes: new { @class = "control-label" })
-            @Html.EditorFor(model => model.OtherEmploymentSector, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.OtherEmploymentSector, "", new { @class = "text-danger" })
-        </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.EmploymentSector, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-7">
+                    @Html.EnumDropDownListFor(model => model.EmploymentSector, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.EmploymentSector, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
-        <div class="form-group col-xs-12 col-md-4">
-            @Html.LabelFor(model => model.AreaOfPractice, htmlAttributes: new { @class = "control-label" })
-            @Html.EditorFor(model => model.AreaOfPractice, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.AreaOfPractice, "", new { @class = "text-danger" })
-        </div>
+            <div class="form-group" id="OtherEmploymentSectorGroup">
+                @Html.LabelFor(model => model.OtherEmploymentSector, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-7">
+                    @Html.EditorFor(model => model.OtherEmploymentSector, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.OtherEmploymentSector, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
-        <div class="form-group col-xs-12 col-md-8">
-            @Html.LabelFor(model => model.OtherAreaOfPractice, htmlAttributes: new { @class = "control-label" })
-            @Html.EditorFor(model => model.OtherAreaOfPractice, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.OtherAreaOfPractice, "", new { @class = "text-danger" })
-        </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.AreaOfPractice, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-7">
+                    @Html.EnumDropDownListFor(model => model.AreaOfPractice, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.AreaOfPractice, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
-        <div class="form-group col-xs-12 col-md-8">
-            @Html.LabelFor(model => model.CurrentCompany, htmlAttributes: new { @class = "control-label" })
-            @Html.EditorFor(model => model.CurrentCompany, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.CurrentCompany, "", new { @class = "text-danger" })
-        </div>
+            <div class="form-group" id="OtherAreaOfPracticeGroup">
+                @Html.LabelFor(model => model.OtherAreaOfPractice, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-7">
+                    @Html.EditorFor(model => model.OtherAreaOfPractice, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.OtherAreaOfPractice, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
-        <div class="form-group col-xs-12 col-md-4">
-            @Html.LabelFor(model => model.EmployeeType, htmlAttributes: new { @class = "control-label" })
-            @Html.EditorFor(model => model.EmployeeType, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.EmployeeType, "", new { @class = "text-danger" })
-        </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.CurrentCompany, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-7">
+                    @Html.EditorFor(model => model.CurrentCompany, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CurrentCompany, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
-        <div class="form-group col-xs-12 col-md-4">
-            @Html.LabelFor(model => model.CurrentJobPosition, htmlAttributes: new { @class = "control-label" })
-            @Html.EditorFor(model => model.CurrentJobPosition, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.CurrentJobPosition, "", new { @class = "text-danger" })
-        </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.EmployeeType, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-7">
+                    @Html.EnumDropDownListFor(model => model.EmployeeType, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.EmployeeType, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
-        <div class="form-group col-xs-12 col-md-8">
-            @Html.LabelFor(model => model.WorkAddress, htmlAttributes: new { @class = "control-label" })
-            @Html.EditorFor(model => model.WorkAddress, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.WorkAddress, "", new { @class = "text-danger" })
-        </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.CurrentJobPosition, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-7">
+                    @Html.EditorFor(model => model.CurrentJobPosition, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CurrentJobPosition, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
-        <div class="form-group col-xs-12 col-md-4">
-            @Html.LabelFor(model => model.CompanyTelNum, htmlAttributes: new { @class = "control-label" })
-            @Html.EditorFor(model => model.CompanyTelNum, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.CompanyTelNum, "", new { @class = "text-danger" })
-        </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.WorkAddress, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-7">
+                    @Html.EditorFor(model => model.WorkAddress, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.WorkAddress, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
-        <div class="form-group col-xs-12 col-md-4">
-            @Html.LabelFor(model => model.CompanyFaxNum, htmlAttributes: new { @class = "control-label" })
-            @Html.EditorFor(model => model.CompanyFaxNum, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.CompanyFaxNum, "", new { @class = "text-danger" })
-        </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.CompanyTelNum, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-7">
+                    @Html.EditorFor(model => model.CompanyTelNum, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CompanyTelNum, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
-        <div class="form-group col-xs-12 col-md-4">
-            @Html.LabelFor(model => model.CompanyEmail, htmlAttributes: new { @class = "control-label" })
-            @Html.EditorFor(model => model.CompanyEmail, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.CompanyEmail, "", new { @class = "text-danger" })
-        </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.CompanyFaxNum, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-7">
+                    @Html.EditorFor(model => model.CompanyFaxNum, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CompanyFaxNum, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
-        <div class="form-group col-xs-12 col-md-4">
-            <input type="submit" value="Save" class="btn btn-default" />
-        </div>
-    }
+            <div class="form-group">
+                @Html.LabelFor(model => model.CompanyEmail, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-7">
+                    @Html.EditorFor(model => model.CompanyEmail, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CompanyEmail, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <br />
+                <div class="col-md-offset-3 col-md-7">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        }
+    </div>
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
     <script>
-        $("#profInfoId").addClass("active");
+        $(document).ready(function () {
+            var employmentSector = $('#EmploymentSector');
+            var selectedSector = $('option:selected', employmentSector).val();
+            if (selectedSector == 100) {
+                $('#OtherEmploymentSectorGroup').show();
+            } else {
+                $('#OtherEmploymentSectorGroup').hide();
+            }
+
+            employmentSector.on('change', function () {
+                selectedSector = $('option:selected', employmentSector).val();
+
+                if (selectedSector == 100) {
+                    $('#OtherEmploymentSectorGroup').show();
+                } else {
+                    $('#OtherEmploymentSectorGroup').hide();
+                }
+            });
+
+            var areaOfPractice = $('#AreaOfPractice');
+            var selectedPractice = $('option:selected', areaOfPractice).val();
+            if (selectedPractice == 100) {
+                $('#OtherAreaOfPracticeGroup').show();
+            } else {
+                $('#OtherAreaOfPracticeGroup').hide();
+            }
+
+            areaOfPractice.on('change', function () {
+                selectedPractice = $('option:selected', areaOfPractice).val();
+
+                if (selectedPractice == 100) {
+                    $('#OtherAreaOfPracticeGroup').show();
+                } else {
+                    $('#OtherAreaOfPracticeGroup').hide();
+                }
+            });
+        });
     </script>
 }

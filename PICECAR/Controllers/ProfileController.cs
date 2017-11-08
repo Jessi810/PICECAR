@@ -159,9 +159,14 @@ namespace PICECAR.Controllers
             return RedirectToAction("Index", "Profile");
         }
 
-        public ActionResult Profession()
+        public async Task<ActionResult> Profession()
         {
-            return View();
+            Profession profession = await db.Professions.FindAsync(User.Identity.GetUserId());
+            if (profession == null)
+            {
+                return HttpNotFound();
+            }
+            return View(profession);
         }
 
         [HttpPost]

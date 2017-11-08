@@ -353,6 +353,7 @@
     <Content Include="Views\Profile\Membership.cshtml" />
     <None Include="Views\Profile\Membership.cshtml.backup" />
     <Content Include="Views\Profile\Profession.cshtml" />
+    <None Include="Views\Profile\Profession.cshtml.backup" />
     <Content Include="Views\Profile\Education.cshtml" />
     <Content Include="Views\Profile\_ViewStart.cshtml" />
     <Content Include="Views\Profile\_Layout.cshtml" />
