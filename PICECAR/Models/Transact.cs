@@ -13,18 +13,23 @@ namespace PICECAR.Models
         public int PaymentOfDuesId { get; set; }
 
         [Display(Name = "From")]
+        [Range(1900, 3000, ErrorMessage = "Invalid year")]
         public int? InclusiveYearFrom { get; set; }
 
         [Display(Name = "to")]
+        [Range(1900, 3000, ErrorMessage = "Invalid year")]
         public int? InclusiveYearTo { get; set; }
 
         [Display(Name = "Date")]
+        //[DataType(DataType.Date, ErrorMessage = "Invalid date")]
         public DateTime? LifeMemberPayment { get; set; }
 
         [Display(Name = "Date")]
+        //[DataType(DataType.Date, ErrorMessage = "Invalid date")]
         public DateTime? PaymentDate { get; set; }
 
         [Display(Name = "Amount")]
+        [DataType(DataType.Currency, ErrorMessage = "Invalid amount")]
         public decimal? PaymentAmount { get; set; }
 
         [Display(Name = "OR #")]

@@ -4,6 +4,7 @@ using PICECAR.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -72,10 +73,9 @@ namespace PICECAR.Controllers
             //    return View(model);
             //}
 
-            string userId = User.Identity.GetUserId();
             Seminar seminar = new Seminar
             {
-                Id = userId,
+                Id = User.Identity.GetUserId(),
                 Code = model.Code,
                 Title = model.Title,
                 Topic = model.Topic,
@@ -96,18 +96,21 @@ namespace PICECAR.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddPaymentOfDue(PaymentOfDues model)
+        public async Task<ActionResult> AddPaymentOfDue([Bind(Include = "PaymentOfDuesId,Id,InclusiveYearFrom,InclusiveYearTo,LifeMemberPayment,PaymentDate,PaymentAmount,OrNum")] PaymentOfDues model)
         {
-            // TODO: Add validation
-            //if (!ModelState.IsValid)
-            //{
-            //    return View(model);
-            //}
-
-            string userId = User.Identity.GetUserId();
-            PaymentOfDues pod = new PaymentOfDues
+            if (!ModelState.IsValid)
             {
-                Id = userId,
+                var errors = ModelState.Values.SelectMany(v => v.Errors);
+                foreach (var item in errors)
+                {
+                    Debug.WriteLine(item.ErrorMessage);
+                }
+                return View(model);
+            }
+
+            PaymentOfDues paymentOfDues = new PaymentOfDues
+            {
+                Id = User.Identity.GetUserId(),
                 InclusiveYearFrom = model.InclusiveYearFrom,
                 InclusiveYearTo = model.InclusiveYearTo,
                 LifeMemberPayment = model.LifeMemberPayment,
@@ -115,10 +118,10 @@ namespace PICECAR.Controllers
                 PaymentAmount = model.PaymentAmount,
                 OrNum = model.OrNum
             };
-            db.PaymentOfDues.Add(pod);
+            db.PaymentOfDues.Add(paymentOfDues);
             await db.SaveChangesAsync();
 
-            return RedirectToAction("Index");
+            return RedirectToAction("AddPaymentOfDue");
         }
 
         public ActionResult EditMembership()
@@ -129,19 +132,11 @@ namespace PICECAR.Controllers
         [HttpPost]
         public async Task<ActionResult> EditMembership(MembershipStatus model)
         {
-            // TODO: Add validation
-            //if (!ModelState.IsValid)
-            //{
-            //    return View(model);
-            //}
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
 
-            //MembershipStatus memstat = new MembershipStatus
-            //{
-            //    Id = user.Id,
-            //    CurrentStatus = user.MembershipInfo.TypeOfMembership.ToString(),
-            //    NewStatus = model.NewStatus
-            //};
-            //db.MembershipStatuses.Add(memstat);
             model.Id = User.Identity.GetUserId();
             db.Entry(model).State = EntityState.Modified;
             await db.SaveChangesAsync();

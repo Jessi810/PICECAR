@@ -16,7 +16,7 @@
         @using (Html.BeginForm("AddPaymentOfDue", "Transact", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
         {
             @Html.AntiForgeryToken()
-            @Html.HiddenFor(model => model.PaymentOfDuesId)
+            @Html.HiddenFor(model => model.Id)
 
             <div class="form-group">
                 <div class="col-xs-12 col-md-12 col-md-offset-1">
