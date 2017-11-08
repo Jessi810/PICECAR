@@ -328,10 +328,18 @@ namespace PICECAR.Controllers
         }
 
         // GET: Profile
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
-            var personalInfos = db.PersonalInfos.Include(p => p.User);
-            return View(await personalInfos.ToListAsync());
+            string userId = User.Identity.GetUserId();
+            Profile profile = new Profile
+            {
+                PersonalInfo = db.PersonalInfos.Find(userId),
+                MembershipInfo = db.MembershipInfos.Find(userId),
+                Education = db.Educations.Find(userId),
+                Profession = db.Professions.Find(userId)
+            };
+
+            return View(profile);
         }
 
         // GET: Profile/Details/5
