@@ -18,14 +18,12 @@ namespace PICECAR.Controllers
             return View();
         }
 
-        [ActionName("Seminar")]
         public ActionResult AddSeminar()
         {
             return View();
         }
 
         [HttpPost]
-        [ActionName("Seminar")]
         public ActionResult AddSeminar(Seminar model)
         {
             if (!ModelState.IsValid)
