@@ -120,5 +120,32 @@ namespace PICECAR.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public ActionResult EditMembership()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> EditMembership(MembershipStatus model)
+        {
+            // TODO: Add validation
+            //if (!ModelState.IsValid)
+            //{
+            //    return View(model);
+            //}
+
+            ApplicationUser user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            MembershipStatus memstat = new MembershipStatus
+            {
+                Id = user.Id,
+                CurrentStatus = user.MembershipInfo.TypeOfMembership,
+                NewStatus = model.NewStatus
+            };
+            db.MembershipStatuses.Add(memstat);
+            await db.SaveChangesAsync();
+
+            return RedirectToAction("Index");
+        }
     }
 }

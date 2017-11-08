@@ -71,8 +71,10 @@ namespace PICECAR.Models
         [Key, ForeignKey("User")]
         public string Id { get; set; }
 
+        [Display(Name = "Current Status")]
         public string CurrentStatus { get; set; }
 
+        [Display(Name = "New Status")]
         public string NewStatus { get; set; }
 
 
