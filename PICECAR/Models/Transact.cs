@@ -49,9 +49,11 @@ namespace PICECAR.Models
         public string Code { get; set; }
 
         [Display(Name = "Title")]
+        [MaxLength(150, ErrorMessage = "{0} should only be {1} in length")]
         public string Title { get; set; }
 
         [Display(Name = "Topics")]
+        [MaxLength(5000, ErrorMessage = "{0} should only be {1} in length")]
         public string Topic { get; set; }
 
         [Display(Name = "Date")]
@@ -61,9 +63,11 @@ namespace PICECAR.Models
         public DateTime? DateTo { get; set; }
 
         [Display(Name = "# of Hours")]
+        [Range(1, 1000, ErrorMessage = "Should be {1} to {2} hours")]
         public int? Hours { get; set; }
 
         [Display(Name = "CPD units earned")]
+        [Range(1, 1000, ErrorMessage = "Should be {1} to {2} units")]
         public int? CpdUnitsEarned { get; set; }
 
         [ForeignKey("User")]
