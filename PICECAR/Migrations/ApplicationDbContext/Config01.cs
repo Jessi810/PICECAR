@@ -1,4 +1,4 @@
-namespace PICECAR.Migrations
+namespace PICECAR.Migrations.ApplicationDbContext
 {
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
@@ -8,9 +8,9 @@ namespace PICECAR.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<PICECAR.Models.ApplicationDbContext>
+    internal sealed class Config01 : DbMigrationsConfiguration<PICECAR.Models.ApplicationDbContext>
     {
-        public Configuration()
+        public Config01()
         {
             AutomaticMigrationsEnabled = true;
             AutomaticMigrationDataLossAllowed = true;

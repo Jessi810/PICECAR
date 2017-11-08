@@ -10,18 +10,24 @@ namespace PICECAR.Models
     public class PaymentOfDues
     {
         [Key]
-        public string PaymentOfDuesId { get; set; }
+        public int PaymentOfDuesId { get; set; }
 
+        [Display(Name = "From")]
         public int? InclusiveYearFrom { get; set; }
 
+        [Display(Name = "to")]
         public int? InclusiveYearTo { get; set; }
 
+        [Display(Name = "Date")]
         public DateTime? LifeMemberPayment { get; set; }
 
+        [Display(Name = "Date")]
         public DateTime? PaymentDate { get; set; }
 
-        public decimal PaymentAmount { get; set; }
+        [Display(Name = "Amount")]
+        public decimal? PaymentAmount { get; set; }
 
+        [Display(Name = "OR #")]
         public string OrNum { get; set; }
 
         [ForeignKey("User")]

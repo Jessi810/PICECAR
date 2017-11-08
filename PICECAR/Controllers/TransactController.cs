@@ -55,7 +55,7 @@ namespace PICECAR.Controllers
         // GET: Transact
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("AddSeminar");
         }
 
         public ActionResult AddSeminar()
@@ -86,15 +86,37 @@ namespace PICECAR.Controllers
             };
             db.Seminars.Add(seminar);
             await db.SaveChangesAsync();
-            //if (sem == null)
-            //{
 
-            //}
-            //else
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult AddPaymentOfDue()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> AddPaymentOfDue(PaymentOfDues model)
+        {
+            // TODO: Add validation
+            //if (!ModelState.IsValid)
             //{
-            //    db.Entry(seminar).State = EntityState.Modified;
-            //    await db.SaveChangesAsync();
+            //    return View(model);
             //}
+
+            string userId = User.Identity.GetUserId();
+            PaymentOfDues pod = new PaymentOfDues
+            {
+                Id = userId,
+                InclusiveYearFrom = model.InclusiveYearFrom,
+                InclusiveYearTo = model.InclusiveYearTo,
+                LifeMemberPayment = model.LifeMemberPayment,
+                PaymentDate = model.PaymentDate,
+                PaymentAmount = model.PaymentAmount,
+                OrNum = model.OrNum
+            };
+            db.PaymentOfDues.Add(pod);
+            await db.SaveChangesAsync();
 
             return RedirectToAction("Index");
         }

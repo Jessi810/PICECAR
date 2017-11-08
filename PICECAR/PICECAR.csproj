@@ -282,6 +282,8 @@
     <Content Include="Views\Transact\_Layout.cshtml" />
     <Content Include="Views\Transact\_ViewStart.cshtml" />
     <Content Include="Views\Transact\AddSeminar.cshtml" />
+    <Content Include="Views\Transact\AddPaymentOfDue.cshtml" />
+    <None Include="Views\Transact\AddPaymentOfDue.cshtml.backup" />
     <None Include="Views\Transact\AddSeminar.cshtml.backup" />
   </ItemGroup>
   <ItemGroup>
