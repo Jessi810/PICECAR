@@ -147,5 +147,32 @@ namespace PICECAR.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public ActionResult EditChapter()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> EditChapter(Chapter model)
+        {
+            // TODO: Add validation
+            //if (!ModelState.IsValid)
+            //{
+            //    return View(model);
+            //}
+
+            ApplicationUser user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            Chapter chapter = new Chapter
+            {
+                Id = user.Id,
+                CurrentChapter = model.CurrentChapter,  // TODO: Change to get user's chapter
+                NewChapter = model.NewChapter
+            };
+            db.Chapters.Add(chapter);
+            await db.SaveChangesAsync();
+
+            return RedirectToAction("Index");
+        }
     }
 }

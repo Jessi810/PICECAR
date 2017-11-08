@@ -86,8 +86,10 @@ namespace PICECAR.Models
         [Key, ForeignKey("User")]
         public string Id { get; set; }
 
+        [Display(Name = "Current Chapter")]
         public string CurrentChapter { get; set; }
 
+        [Display(Name = "New Chapter")]
         public string NewChapter { get; set; }
 
 
