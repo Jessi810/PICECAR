@@ -24,10 +24,10 @@ namespace PICECAR.Models
         public virtual Profession Profession { get; set; }
         public virtual IList<Education> Educations { get; set; }
 
-        public virtual IList<Transact.PaymentOfDues> PaymentOfDue { get; set; }
-        public virtual IList<Transact.Seminar> Seminar { get; set; }
-        public virtual Transact.MembershipStatus MembershipStatuses { get; set; }
-        public virtual Transact.Chapter Chapters { get; set; }
+        public virtual IList<PaymentOfDues> PaymentOfDue { get; set; }
+        public virtual IList<Seminar> Seminar { get; set; }
+        public virtual MembershipStatus MembershipStatuses { get; set; }
+        public virtual Chapter Chapters { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -37,10 +37,10 @@ namespace PICECAR.Models
         public DbSet<Profession> Professions { get; set; }
         public DbSet<Education> Educations { get; set; }
 
-        public DbSet<Transact.PaymentOfDues> PaymentOfDues { get; set; }
-        public DbSet<Transact.Seminar> Seminars { get; set; }
-        public DbSet<Transact.MembershipStatus> MembershipStatuses { get; set; }
-        public DbSet<Transact.Chapter> Chapters { get; set; }
+        public DbSet<PaymentOfDues> PaymentOfDues { get; set; }
+        public DbSet<Seminar> Seminars { get; set; }
+        public DbSet<MembershipStatus> MembershipStatuses { get; set; }
+        public DbSet<Chapter> Chapters { get; set; }
 
         public ApplicationDbContext()
             : base("PICEDatabase", throwIfV1Schema: false)

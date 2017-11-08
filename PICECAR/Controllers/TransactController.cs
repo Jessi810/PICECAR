@@ -26,7 +26,7 @@ namespace PICECAR.Controllers
 
         [HttpPost]
         [ActionName("Seminar")]
-        public ActionResult AddSeminar(Transact.Seminar model)
+        public ActionResult AddSeminar(Seminar model)
         {
             if (!ModelState.IsValid)
             {
