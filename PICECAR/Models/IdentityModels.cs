@@ -73,5 +73,7 @@ namespace PICECAR.Models
             modelBuilder.Entity<IdentityUserClaim>()
                 .ToTable("UserClaim");
         }
+
+        public System.Data.Entity.DbSet<PICECAR.Models.ApplicationUser> IdentityUsers { get; set; }
     }
 }
