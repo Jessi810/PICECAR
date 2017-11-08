@@ -265,16 +265,16 @@ namespace PICECAR.Controllers
             return RedirectToAction("Education", "Profile");
         }
 
-        //public async Task<ActionResult> DeleteEducation(int id)
-        //{
-        //    // TODO: Add validation
-        //    var education = await db.Educations.FindAsync(id);
-        //    return View(education);
-        //}
+        public async Task<ActionResult> DeleteEducation(int id)
+        {
+            // TODO: Add validation
+            var education = await db.Educations.FindAsync(id);
+            return View(education);
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteEducation(int id)
+        public async Task<ActionResult> DeleteEducationConfirmed(int id)
         {
             // TODO: Add validation
             Education education = await db.Educations.FindAsync(id);
