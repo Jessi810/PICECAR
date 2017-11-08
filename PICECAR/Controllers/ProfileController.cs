@@ -156,7 +156,7 @@ namespace PICECAR.Controllers
             db.Entry(membershipInfo).State = EntityState.Modified;
             await db.SaveChangesAsync();
 
-            return RedirectToAction("Membership", "Profile");
+            return RedirectToAction("Index", "Profile");
         }
 
         public async Task<ActionResult> Profession()
@@ -207,7 +207,7 @@ namespace PICECAR.Controllers
             db.Entry(profession).State = EntityState.Modified;
             await db.SaveChangesAsync();
 
-            return RedirectToAction("Profession", "Profile");
+            return RedirectToAction("Index", "Profile");
         }
 
         public async Task<ActionResult> Education()

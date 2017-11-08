@@ -363,6 +363,7 @@
     <Content Include="Views\Transact\_ViewStart.cshtml" />
     <Content Include="Views\Transact\AddSeminar.cshtml" />
     <Content Include="Views\Transact\AddPaymentOfDue.cshtml" />
+    <Content Include="Views\Shared\_Navbar.cshtml" />
     <None Include="Views\Transact\AddPaymentOfDue.cshtml.backup" />
     <None Include="Views\Transact\AddSeminar.cshtml.backup" />
     <Content Include="Views\Transact\EditMembership.cshtml" />
