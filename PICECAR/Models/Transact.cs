@@ -32,20 +32,27 @@ namespace PICECAR.Models
     public class Seminar
     {
         [Key]
-        public string SeminarId { get; set; }
+        public int SeminarId { get; set; }
 
+        [Display(Name = "ID / Code")]
         public string Code { get; set; }
 
+        [Display(Name = "Title")]
         public string Title { get; set; }
 
+        [Display(Name = "Topics")]
         public string Topic { get; set; }
 
+        [Display(Name = "Date")]
         public DateTime? DateFrom { get; set; }
 
+        [Display(Name = "to")]
         public DateTime? DateTo { get; set; }
 
+        [Display(Name = "# of Hours")]
         public int? Hours { get; set; }
 
+        [Display(Name = "CPD units earned")]
         public int? CpdUnitsEarned { get; set; }
 
         [ForeignKey("User")]
