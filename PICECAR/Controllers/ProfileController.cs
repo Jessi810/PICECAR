@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using PICECAR.Models;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity;
+using PICECAR.Extension;
 
 namespace PICECAR.Controllers
 {
@@ -113,9 +114,14 @@ namespace PICECAR.Controllers
             return RedirectToAction("Index", "Profile");
         }
 
-        public ActionResult Membership()
+        public async Task<ActionResult> Membership()
         {
-            return View();
+            MembershipInfo memInfo = await db.MembershipInfos.FindAsync(User.Identity.GetUserId());
+            if (memInfo == null)
+            {
+                return HttpNotFound();
+            }
+            return View(memInfo);
         }
 
         [HttpPost]

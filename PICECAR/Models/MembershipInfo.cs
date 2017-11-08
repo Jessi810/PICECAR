@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using PICECAR.Extension;
 
 namespace PICECAR.Models
 {
@@ -20,7 +21,7 @@ namespace PICECAR.Models
         public DateTime? PrcDateIssued { get; set; }
 
         [Display(Name = "Membership Type")]
-        public string TypeOfMembership { get; set; }
+        public EnumData.MembershipType TypeOfMembership { get; set; }
 
         [Display(Name = "Membership #")]
         public string MembershipNum { get; set; }

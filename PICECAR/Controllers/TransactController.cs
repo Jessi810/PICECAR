@@ -139,7 +139,7 @@ namespace PICECAR.Controllers
             MembershipStatus memstat = new MembershipStatus
             {
                 Id = user.Id,
-                CurrentStatus = user.MembershipInfo.TypeOfMembership,
+                CurrentStatus = user.MembershipInfo.TypeOfMembership.ToString(),
                 NewStatus = model.NewStatus
             };
             db.MembershipStatuses.Add(memstat);

@@ -23,11 +23,13 @@ namespace PICECAR
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/moment.js",
                       "~/Scripts/bootstrap-datetimepicker.js",
+                      "~/Scripts/bootstrap-select.js",
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/bootstrap-datetimepicker.css",
+                      "~/Content/bootstrap-select.css",
                       "~/Content/site.css"));
         }
     }
