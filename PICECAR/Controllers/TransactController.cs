@@ -135,14 +135,15 @@ namespace PICECAR.Controllers
             //    return View(model);
             //}
 
-            ApplicationUser user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-            MembershipStatus memstat = new MembershipStatus
-            {
-                Id = user.Id,
-                CurrentStatus = user.MembershipInfo.TypeOfMembership.ToString(),
-                NewStatus = model.NewStatus
-            };
-            db.MembershipStatuses.Add(memstat);
+            //MembershipStatus memstat = new MembershipStatus
+            //{
+            //    Id = user.Id,
+            //    CurrentStatus = user.MembershipInfo.TypeOfMembership.ToString(),
+            //    NewStatus = model.NewStatus
+            //};
+            //db.MembershipStatuses.Add(memstat);
+            model.Id = User.Identity.GetUserId();
+            db.Entry(model).State = EntityState.Modified;
             await db.SaveChangesAsync();
 
             return RedirectToAction("EditMembership");

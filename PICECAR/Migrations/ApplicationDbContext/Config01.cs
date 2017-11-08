@@ -88,6 +88,18 @@ namespace PICECAR.Migrations.ApplicationDbContext
                     };
                     context.Professions.AddOrUpdate(profession);
 
+                    var membershipStatus = new MembershipStatus
+                    {
+                        Id = user.Id
+                    };
+                    context.MembershipStatuses.AddOrUpdate(membershipStatus);
+
+                    var chapter = new Chapter
+                    {
+                        Id = user.Id
+                    };
+                    context.Chapters.AddOrUpdate(chapter);
+
                     context.SaveChanges();
                 }
             }
