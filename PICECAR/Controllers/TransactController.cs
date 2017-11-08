@@ -157,52 +157,13 @@ namespace PICECAR.Controllers
         [HttpPost]
         public async Task<ActionResult> EditChapter(Chapter model)
         {
-            // TODO: Add validation
-            //if (!ModelState.IsValid)
-            //{
-            //    return View(model);
-            //}
-
-            ApplicationUser user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-            var entry = db.Entry(model);
-
-            if (entry.State == EntityState.Added)
+            if (!ModelState.IsValid)
             {
-                Chapter chapter = new Chapter
-                {
-                    Id = user.Id,
-                    CurrentChapter = model.CurrentChapter,  // TODO: Change to get user's chapter
-                    NewChapter = model.NewChapter
-                };
-                db.Chapters.Add(chapter);
-
-                await db.SaveChangesAsync();
+                return View(model);
             }
-            else if (entry.State == EntityState.Modified || entry.State == EntityState.Detached)
-            {
-                // TODO: Fix not updating data
-                model.Id = user.Id;
-                entry.State = EntityState.Modified;
-                db.Set<Chapter>().Attach(model);
-                await db.SaveChangesAsync();
-            }
-            //// 
-            //if (await db.Chapters.FindAsync(user.Id) != null)
-            //{
-            //    model.Id = user.Id;
-            //    db.Entry(model).State = EntityState.Modified;
-            //}
-            //else
-            //{
-            //    Chapter chapter = new Chapter
-            //    {
-            //        Id = user.Id,
-            //        CurrentChapter = model.CurrentChapter,  // TODO: Change to get user's chapter
-            //        NewChapter = model.NewChapter
-            //    };
-            //    db.Chapters.Add(chapter);
-            //}
 
+            model.Id = User.Identity.GetUserId();
+            db.Entry(model).State = EntityState.Modified;
             await db.SaveChangesAsync();
 
             return RedirectToAction("EditChapter");
