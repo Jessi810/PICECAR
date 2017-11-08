@@ -120,6 +120,8 @@
     @Scripts.Render("~/bundles/jqueryval")
 
     <script>
+        $("#profInfoId").addClass("active");
+
         $(document).ready(function () {
             var employmentSector = $('#EmploymentSector');
             var selectedSector = $('option:selected', employmentSector).val();

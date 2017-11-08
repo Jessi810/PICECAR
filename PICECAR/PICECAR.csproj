@@ -351,6 +351,7 @@
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\Profile\PersonalInfo.cshtml" />
     <Content Include="Views\Profile\Membership.cshtml" />
+    <None Include="Views\Profile\Education.cshtml.backup" />
     <None Include="Views\Profile\Membership.cshtml.backup" />
     <Content Include="Views\Profile\Profession.cshtml" />
     <None Include="Views\Profile\Profession.cshtml.backup" />

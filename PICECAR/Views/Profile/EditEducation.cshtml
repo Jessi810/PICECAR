@@ -15,32 +15,30 @@
         @Html.AntiForgeryToken()
         @Html.HiddenFor(model => model.EducationId)
 
-        <div class="form-group col-xs-12 col-md-6">
+        <div class="form-group col-xs-12 col-md-4">
             @Html.LabelFor(model => model.Course, htmlAttributes: new { @class = "control-label" })
             @Html.EditorFor(model => model.Course, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Course, "", new { @class = "text-danger" })
         </div>
 
-        <div class="form-group col-xs-12 col-md-4">
+        <div class="form-group col-xs-12 col-md-5">
             @Html.LabelFor(model => model.School, htmlAttributes: new { @class = "control-label" })
             @Html.EditorFor(model => model.School, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.School, "", new { @class = "text-danger" })
         </div>
 
-        <div class="form-group col-xs-12 col-md-2">
+        <div class="form-group col-xs-12 col-md-3">
             @Html.LabelFor(model => model.YearGraduated, htmlAttributes: new { @class = "control-label" })
             @Html.EditorFor(model => model.YearGraduated, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.YearGraduated, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group col-xs-12 col-md-12">
-            <input type="submit" value="Save" class="btn btn-default" />
+            <br />
+            <input type="submit" value="Save Changes" class="btn btn-success" />
+            @Html.ActionLink("Cancel", "Education", "Profile", null, new { @class = "btn btn-default" })
         </div>
     }
-</div>
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
 
 @section Scripts {
