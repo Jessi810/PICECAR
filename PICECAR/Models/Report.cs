@@ -21,6 +21,20 @@ namespace PICECAR.Models
         public List<AreaOfPracticeProp> AreaOfPracticeItems { get; set; }
     }
 
+    public class UnpaidMember
+    {
+        public DateTime Date { get; set; }
+
+        [Display(Name = "Membership Type")]
+        public List<MembershipTypeProp> MembershipTypeItems { get; set; }
+
+        [Display(Name = "Employment Sector")]
+        public List<EmploymentSectorProp> EmploymentSectorItems { get; set; }
+
+        [Display(Name = "Area of Practice")]
+        public List<AreaOfPracticeProp> AreaOfPracticeItems { get; set; }
+    }
+
     public class MembershipTypeProp
     {
         public EnumData.MembershipType MembershipType { get; set; }

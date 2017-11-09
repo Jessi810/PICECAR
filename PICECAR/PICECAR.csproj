@@ -370,6 +370,8 @@
     <Content Include="Views\Reports\GenerateActiveMember.cshtml" />
     <Content Include="Views\Reports\_Layout.cshtml" />
     <Content Include="Views\Reports\_ViewStart.cshtml" />
+    <Content Include="Views\Reports\UnpaidMember.cshtml" />
+    <Content Include="Views\Reports\GenerateUnpaidMember.cshtml" />
     <None Include="Views\Transact\AddPaymentOfDue.cshtml.backup" />
     <None Include="Views\Transact\AddSeminar.cshtml.backup" />
     <Content Include="Views\Transact\EditMembership.cshtml" />
