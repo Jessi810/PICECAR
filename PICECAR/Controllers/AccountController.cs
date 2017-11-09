@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using PICECAR.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace PICECAR.Controllers
 {
@@ -152,20 +153,34 @@ namespace PICECAR.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    LastActive = DateTime.Now
+                };
+
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     using (db = new ApplicationDbContext())
                     {
+                        var store = new UserStore<ApplicationUser>(db);
+                        var manager = new UserManager<ApplicationUser>(store);
+                        manager.AddToRole(user.Id, "User");
+
                         db.PersonalInfos.Add(new PersonalInfo()
                         {
                             Id = user.Id,
                             FirstName = model.FirstName,
                             MiddleName = model.MiddleName,
-                            LastName = model.LastName
-                            // TODO: Add the remaining properties
+                            LastName = model.LastName,
+                            Email = model.Email
                         });
+                        db.MembershipInfos.Add(new MembershipInfo { Id = user.Id });
+                        db.Professions.Add(new Profession { Id = user.Id });
+                        db.MembershipStatuses.Add(new MembershipStatus { Id = user.Id });
+                        db.Chapters.Add(new Chapter { Id = user.Id });
 
                         await db.SaveChangesAsync();
                     }
