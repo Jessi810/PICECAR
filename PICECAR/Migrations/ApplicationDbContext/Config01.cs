@@ -61,7 +61,8 @@ namespace PICECAR.Migrations.ApplicationDbContext
                     var user = new ApplicationUser
                     {
                         Email = email,
-                        UserName = email
+                        UserName = email,
+                        LastActive = DateTime.Now
                     };
 
                     manager.Create(user, users[i, 1]);
