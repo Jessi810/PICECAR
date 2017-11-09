@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace PICECAR.Controllers
 {
+    [Authorize(Roles = "Administrator,Secretary")]
     public class ReportsController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
