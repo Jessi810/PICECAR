@@ -1,0 +1,45 @@
+﻿@using PICECAR.Models
+
+@{
+    ViewBag.Title = "GenerateActiveMember";
+}
+
+<h2>GenerateActiveMember</h2>
+
+@{
+    <label>Active Member:</label>
+    <br />
+    foreach (var item in (List<ApplicationUser>)ViewData["ActiveFilter"])
+    {
+        <label>@item.Email</label>
+        <br />
+    }
+    <br />
+
+    <label>Type Match:</label>
+    <br />
+    foreach (var item in (List<ApplicationUser>)ViewData["TypeMatch"])
+    {
+        <label>@item.Email</label>
+        <br />
+    }
+    <br />
+
+    <label>Sector Match:</label>
+    <br />
+    foreach (var item in (List<ApplicationUser>)ViewData["SectorMatch"])
+    {
+        <label>@item.Email</label>
+        <br />
+    }
+    <br />
+
+    <label>Practice Match:</label>
+    <br />
+    foreach (var item in (List<ApplicationUser>)ViewData["PracticeMatch"])
+    {
+        <label>@item.Email</label>
+        <br />
+    }
+    <br />
+}

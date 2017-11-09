@@ -5,6 +5,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Collections.Generic;
+using System;
 
 namespace PICECAR.Models
 {
@@ -18,6 +19,8 @@ namespace PICECAR.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+        public DateTime LastActive { get; set; }
 
         public virtual PersonalInfo PersonalInfo { get; set; }
         public virtual MembershipInfo MembershipInfo { get; set; }

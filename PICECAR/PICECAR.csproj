@@ -171,6 +171,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\TransactController.cs" />
     <Compile Include="Extension\EnumData.cs" />
     <Compile Include="Global.asax.cs">
@@ -181,6 +182,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Profile.cs" />
+    <Compile Include="Models\Report.cs" />
     <Compile Include="Models\Transact.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -364,6 +366,8 @@
     <Content Include="Views\Transact\AddSeminar.cshtml" />
     <Content Include="Views\Transact\AddPaymentOfDue.cshtml" />
     <Content Include="Views\Shared\_Navbar.cshtml" />
+    <Content Include="Views\Reports\ActiveMember.cshtml" />
+    <Content Include="Views\Reports\GenerateActiveMember.cshtml" />
     <None Include="Views\Transact\AddPaymentOfDue.cshtml.backup" />
     <None Include="Views\Transact\AddSeminar.cshtml.backup" />
     <Content Include="Views\Transact\EditMembership.cshtml" />
@@ -390,7 +394,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>1639</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

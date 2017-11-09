@@ -23,7 +23,10 @@ namespace PICECAR.Extension
             Honorary = 4,
 
             [Display(Name = "Fellow")]
-            Fellow = 5
+            Fellow = 5,
+
+            [Display(Name = "All")]
+            All = 200
         }
 
         public enum EmploymentSector
@@ -39,6 +42,9 @@ namespace PICECAR.Extension
 
             [Display(Name = "Others")]
             Others = 100,
+
+            [Display(Name = "All")]
+            All = 200
         }
 
         public enum AreaOfPractice
@@ -57,6 +63,9 @@ namespace PICECAR.Extension
 
             [Display(Name = "Others")]
             Others = 100,
+
+            [Display(Name = "All")]
+            All = 200
         }
 
         public enum EmployeeType
