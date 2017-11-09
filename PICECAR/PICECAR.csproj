@@ -349,6 +349,7 @@
     <Content Include="Views\Profile\Edit.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\Profile\PersonalInfo.cshtml" />
+    <Content Include="Views\Account\_Layout.cshtml" />
     <None Include="Views\Profile\PersonalInfo.cshtml.backup" />
     <Content Include="Views\Profile\Membership.cshtml" />
     <None Include="Views\Profile\Education.cshtml.backup" />
