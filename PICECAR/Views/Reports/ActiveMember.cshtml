@@ -1,0 +1,159 @@
+﻿@model PICECAR.Models.ActiveMember
+
+@{
+    ViewBag.Title = "ActiveMember";
+}
+
+<br />
+<div class="panel panel-default">
+    <div class="panel-heading text-center">
+        <h3 class="panel-title">Generate Active Member Report</h3>
+    </div>
+
+    <div class="panel-body">
+
+        <br />
+        @using (Html.BeginForm("ActiveMember", "Reports", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                <div class="col-xs-12 col-md-12 col-md-offset-1">
+                    <label>List of active members as of:</label>
+                </div>
+                @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-7">
+                    <div class="input-group date" id="Date">
+                        @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <br /><br />
+
+            <div class="form-group col-xs-12 col-md-12">
+                @Html.LabelFor(model => model.MembershipTypeItems, htmlAttributes: new { @class = "col-xs-12 col-md-12" })
+                <div class="col-xs-12 col-md-11 col-md-offset-1">
+                    @for (int i = 0; i < Model.MembershipTypeItems.Count; i++)
+                    {
+                        <div class="checkbox checkbox-inline">
+                            @Html.CheckBoxFor(m => m.MembershipTypeItems[i].IsSelected)
+                            @Html.DisplayFor(m => m.MembershipTypeItems[i].MembershipType)
+                            @Html.HiddenFor(m => m.MembershipTypeItems[i].MembershipType)
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="form-group col-xs-12 col-md-12">
+                @Html.LabelFor(model => model.EmploymentSectorItems, htmlAttributes: new { @class = "col-xs-12 col-md-12" })
+                <div class="col-xs-12 col-md-11 col-md-offset-1">
+                    @for (int i = 0; i < Model.EmploymentSectorItems.Count; i++)
+                    {
+                        <div class="checkbox checkbox-inline">
+                            @Html.CheckBoxFor(m => m.EmploymentSectorItems[i].IsSelected)
+                            @Html.DisplayFor(m => m.EmploymentSectorItems[i].EmploymentSector)
+                            @Html.HiddenFor(m => m.EmploymentSectorItems[i].EmploymentSector)
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="form-group col-xs-12 col-md-12">
+                @Html.LabelFor(model => model.AreaOfPracticeItems, htmlAttributes: new { @class = "col-xs-12 col-md-12" })
+                <div class="col-xs-12 col-md-11 col-md-offset-1">
+                    @for (int i = 0; i < Model.AreaOfPracticeItems.Count; i++)
+                    {
+                        <div class="checkbox checkbox-inline">
+                            @Html.CheckBoxFor(m => m.AreaOfPracticeItems[i].IsSelected)
+                            @Html.DisplayFor(m => m.AreaOfPracticeItems[i].AreaOfPractice)
+                            @Html.HiddenFor(m => m.AreaOfPracticeItems[i].AreaOfPractice)
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="form-group">
+                <br />
+                <div class="col-md-offset-3 col-md-7">
+                    <input type="submit" value="Generate Report" class="btn btn-default" />
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        $("#activeId").addClass("active");
+
+        $(function () {
+            $('#Date').datetimepicker({
+                format: 'MM/DD/YYYY'
+            });
+        });
+
+
+        $("#MembershipTypeItems_5__IsSelected").change(function () {
+            let checked;
+            if (this.checked) {
+                checked = true;
+                console.log("TRUE");
+            } else {
+                checked = false;
+                console.log("FALSE");
+            }
+
+            $("#MembershipTypeItems_0__IsSelected").prop('checked', checked);
+            $("#MembershipTypeItems_1__IsSelected").prop('checked', checked);
+            $("#MembershipTypeItems_2__IsSelected").prop('checked', checked);
+            $("#MembershipTypeItems_3__IsSelected").prop('checked', checked);
+            $("#MembershipTypeItems_4__IsSelected").prop('checked', checked);
+        });
+
+        $("#EmploymentSectorItems_4__IsSelected").change(function () {
+            let checked;
+            if (this.checked) {
+                checked = true;
+                console.log("TRUE");
+            } else {
+                checked = false;
+                console.log("FALSE");
+            }
+
+            $("#EmploymentSectorItems_0__IsSelected").prop('checked', checked);
+            $("#EmploymentSectorItems_1__IsSelected").prop('checked', checked);
+            $("#EmploymentSectorItems_2__IsSelected").prop('checked', checked);
+            $("#EmploymentSectorItems_3__IsSelected").prop('checked', checked);
+        });
+
+        $("#AreaOfPracticeItems_5__IsSelected").change(function () {
+            let checked;
+            if (this.checked) {
+                checked = true;
+                console.log("TRUE");
+            } else {
+                checked = false;
+                console.log("FALSE");
+            }
+
+            $("#AreaOfPracticeItems_0__IsSelected").prop('checked', checked);
+            $("#AreaOfPracticeItems_1__IsSelected").prop('checked', checked);
+            $("#AreaOfPracticeItems_2__IsSelected").prop('checked', checked);
+            $("#AreaOfPracticeItems_3__IsSelected").prop('checked', checked);
+            $("#AreaOfPracticeItems_4__IsSelected").prop('checked', checked);
+            $("#AreaOfPracticeItems_5__IsSelected").prop('checked', checked);
+        });
+    </script>
+}
