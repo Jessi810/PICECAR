@@ -2,6 +2,7 @@
 using PICECAR.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.SqlServer;
 using System.Diagnostics;
 using System.Linq;
 using System.Web;
@@ -280,6 +281,53 @@ namespace PICECAR.Controllers
         public ActionResult GenerateUnpaidMember()
         {
             ViewData["FilteredMembers"] = (List<ApplicationUser>)TempData["FilteredMembers"];
+
+            return View();
+        }
+
+        public ActionResult Seminar()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Seminar(SeminarReport model)
+        {
+            IQueryable<Seminar> filter = from c in db.Seminars select c;
+
+            if (!String.IsNullOrEmpty(model.Code))
+            {
+                filter = from c in db.Seminars where c.Code.ToLower().Contains(model.Code.ToLower()) select c;
+            }
+            else
+            {
+                filter = from c in db.Seminars select c;
+            }
+
+            if (!String.IsNullOrEmpty(model.Title))
+            {
+                filter = from c in db.Seminars where c.Title.ToLower().Contains(model.Title.ToLower()) select c;
+            }
+
+            if (model.DateFrom != null)
+            {
+                filter = from c in db.Seminars where (int) SqlFunctions.DateDiff("day", model.DateFrom, c.DateFrom) > -1 select c;
+            }
+
+            if (model.DateTo != null)
+            {
+                filter = from c in db.Seminars where (int) SqlFunctions.DateDiff("day", c.DateTo, model.DateTo) > -1 select c;
+            }
+
+            TempData["FilteredSeminars"] = filter;
+
+            return RedirectToAction("GenerateSeminar");
+        }
+
+        public ActionResult GenerateSeminar()
+        {
+            var list = new List<Seminar>((IQueryable<Seminar>) TempData["FilteredSeminars"]);
+            ViewData["FilteredSeminars"] = list;
 
             return View();
         }

@@ -35,6 +35,17 @@ namespace PICECAR.Models
         public List<AreaOfPracticeProp> AreaOfPracticeItems { get; set; }
     }
 
+    public class SeminarReport
+    {
+        public string Code { get; set; }
+
+        public string Title { get; set; }
+
+        public DateTime? DateFrom { get; set; }
+
+        public DateTime? DateTo { get; set; }
+    }
+
     public class MembershipTypeProp
     {
         public EnumData.MembershipType MembershipType { get; set; }
