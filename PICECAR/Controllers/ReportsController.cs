@@ -28,14 +28,14 @@ namespace PICECAR.Controllers
             active.MembershipTypeItems.Add(new MembershipTypeProp() { MembershipType = EnumData.MembershipType.Student, IsSelected = false });
             active.MembershipTypeItems.Add(new MembershipTypeProp() { MembershipType = EnumData.MembershipType.Honorary, IsSelected = false });
             active.MembershipTypeItems.Add(new MembershipTypeProp() { MembershipType = EnumData.MembershipType.Fellow, IsSelected = false });
-            active.MembershipTypeItems.Add(new MembershipTypeProp() { MembershipType = EnumData.MembershipType.All, IsSelected = true });
+            active.MembershipTypeItems.Add(new MembershipTypeProp() { MembershipType = EnumData.MembershipType.All, IsSelected = false });
 
             active.EmploymentSectorItems = new List<EmploymentSectorProp>();
             active.EmploymentSectorItems.Add(new EmploymentSectorProp() { EmploymentSector = EnumData.EmploymentSector.Government, IsSelected = false });
             active.EmploymentSectorItems.Add(new EmploymentSectorProp() { EmploymentSector = EnumData.EmploymentSector.Private, IsSelected = false });
             active.EmploymentSectorItems.Add(new EmploymentSectorProp() { EmploymentSector = EnumData.EmploymentSector.OCW, IsSelected = false });
             active.EmploymentSectorItems.Add(new EmploymentSectorProp() { EmploymentSector = EnumData.EmploymentSector.Others, IsSelected = false });
-            active.EmploymentSectorItems.Add(new EmploymentSectorProp() { EmploymentSector = EnumData.EmploymentSector.All, IsSelected = true });
+            active.EmploymentSectorItems.Add(new EmploymentSectorProp() { EmploymentSector = EnumData.EmploymentSector.All, IsSelected = false });
 
             active.AreaOfPracticeItems = new List<AreaOfPracticeProp>();
             active.AreaOfPracticeItems.Add(new AreaOfPracticeProp() { AreaOfPractice = EnumData.AreaOfPractice.Construction, IsSelected = false });
@@ -55,15 +55,10 @@ namespace PICECAR.Controllers
             var users2 = new List<ApplicationUser>();
             var users3 = new List<ApplicationUser>();
             var users4 = new List<ApplicationUser>();
-            var userId1 = new List<string>();
-            var userId2 = new List<string>();
-            var userId3 = new List<string>();
-            var userId4 = new List<string>();
             foreach (var user in db.Users)
             {
                 if (user.LastActive.Subtract(model.Date).Days > -1 && user.LastActive.Subtract(model.Date).Days < 30)
                 {
-                    userId1.Add(user.Id);
                     users1.Add(user);
                     Debug.WriteLine(user.LastActive.Subtract(model.Date).Days + " | " + user.Email);
                 }
@@ -77,14 +72,21 @@ namespace PICECAR.Controllers
             }
 
             var selectedTypes = model.MembershipTypeItems.Where(p => p.IsSelected);
-            foreach (var user in users1)
+            if (selectedTypes.Count() == 0 || selectedTypes.Any(p => p.MembershipType == EnumData.MembershipType.All))
             {
-                foreach (var type in selectedTypes)
+                users2.AddRange(users1);
+            }
+            else
+            {
+                foreach (var user in users1)
                 {
-                    if (user.MembershipInfo.TypeOfMembership == type.MembershipType)
+                    foreach (var type in selectedTypes)
                     {
-                        users2.Add(user);
-                        break;
+                        if (user.MembershipInfo.TypeOfMembership == type.MembershipType)
+                        {
+                            users2.Add(user);
+                            break;
+                        }
                     }
                 }
             }
@@ -93,14 +95,21 @@ namespace PICECAR.Controllers
 
 
             var selectedSectors = model.EmploymentSectorItems.Where(p => p.IsSelected);
-            foreach (var user in users2)
+            if (selectedSectors.Count() == 0 || selectedSectors.Any(p => p.EmploymentSector == EnumData.EmploymentSector.All))
             {
-                foreach (var sector in selectedSectors)
+                users3.AddRange(users2);
+            }
+            else
+            {
+                foreach (var user in users2)
                 {
-                    if (user.Profession.EmploymentSector == sector.EmploymentSector)
+                    foreach (var sector in selectedSectors)
                     {
-                        users3.Add(user);
-                        break;
+                        if (user.Profession.EmploymentSector == sector.EmploymentSector)
+                        {
+                            users3.Add(user);
+                            break;
+                        }
                     }
                 }
             }
@@ -109,14 +118,21 @@ namespace PICECAR.Controllers
 
 
             var selectedPractices = model.AreaOfPracticeItems.Where(p => p.IsSelected);
-            foreach (var user in users3)
+            if (selectedPractices.Count() == 0 || selectedPractices.Any(p => p.AreaOfPractice == EnumData.AreaOfPractice.All))
             {
-                foreach (var practice in selectedPractices)
+                users4.AddRange(users3);
+            }
+            else
+            {
+                foreach (var user in users3)
                 {
-                    if (user.Profession.AreaOfPractice == practice.AreaOfPractice)
+                    foreach (var practice in selectedPractices)
                     {
-                        users4.Add(user);
-                        break;
+                        if (user.Profession.AreaOfPractice == practice.AreaOfPractice)
+                        {
+                            users4.Add(user);
+                            break;
+                        }
                     }
                 }
             }
