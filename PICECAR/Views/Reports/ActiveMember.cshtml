@@ -11,12 +11,11 @@
     </div>
 
     <div class="panel-body">
-
+        @Html.ValidationSummary()
         <br />
         @using (Html.BeginForm("ActiveMember", "Reports", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
         {
             @Html.AntiForgeryToken()
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
             <div class="form-group">
                 <div class="col-xs-12 col-md-12 col-md-offset-1">

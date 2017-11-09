@@ -63,12 +63,11 @@ namespace PICECAR.Controllers
                     Debug.WriteLine(user.LastActive.Subtract(model.Date).Days + " | " + user.Email);
                 }
             }
-            TempData["ActiveFilter"] = users1;
 
             if (users1.Count() == 0)
             {
-                ModelState.AddModelError("", "No active members found.");
-                return RedirectToAction("GenerateActiveMember", model);
+                ModelState.AddModelError("NoActive", "No active members found.");
+                return View("ActiveMember", model);
             }
 
             var selectedTypes = model.MembershipTypeItems.Where(p => p.IsSelected);
@@ -90,7 +89,6 @@ namespace PICECAR.Controllers
                     }
                 }
             }
-            TempData["TypeMatch"] = users2;
 
 
 
@@ -113,7 +111,6 @@ namespace PICECAR.Controllers
                     }
                 }
             }
-            TempData["SectorMatch"] = users3;
 
 
 
@@ -136,17 +133,20 @@ namespace PICECAR.Controllers
                     }
                 }
             }
-            TempData["PracticeMatch"] = users4;
+
+            if (users4.Count() == 0)
+            {
+                ModelState.AddModelError("NoActive", "No active members found.");
+                return View("ActiveMember", model);
+            }
+            TempData["FilteredMembers"] = users4;
 
             return RedirectToAction("GenerateActiveMember");
         }
 
         public ActionResult GenerateActiveMember()
         {
-            ViewData["ActiveFilter"] = (List<ApplicationUser>) TempData["ActiveFilter"];
-            ViewData["TypeMatch"] = (List<ApplicationUser>) TempData["TypeMatch"];
-            ViewData["SectorMatch"] = (List<ApplicationUser>)TempData["SectorMatch"];
-            ViewData["PracticeMatch"] = (List<ApplicationUser>)TempData["PracticeMatch"];
+            ViewData["FilteredMembers"] = (List<ApplicationUser>) TempData["FilteredMembers"];
 
             return View();
         }

@@ -4,42 +4,31 @@
     ViewBag.Title = "GenerateActiveMember";
 }
 
-<h2>GenerateActiveMember</h2>
+<br />
+<div class="panel panel-default">
+    <div class="panel-heading text-center">
+        @Html.ActionLink("Back", "ActiveMember", "Reports", null, new { @class = "btn btn-default btn-xs btn-info pull-left" })
+        <h3 class="panel-title">List of Active Members</h3>
+    </div>
 
-@{
-    <label>Active Member:</label>
-    <br />
-    foreach (var item in (List<ApplicationUser>)ViewData["ActiveFilter"])
-    {
-        <label>@item.Email</label>
-        <br />
-    }
-    <br />
 
-    <label>Type Match:</label>
-    <br />
-    foreach (var item in (List<ApplicationUser>)ViewData["TypeMatch"])
-    {
-        <label>@item.Email</label>
-        <br />
-    }
-    <br />
+    <div class="panel-body">
+        @Html.ValidationSummary()
+        <table class="table table-responsive">
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Mobile</th>
+            </tr>
 
-    <label>Sector Match:</label>
-    <br />
-    foreach (var item in (List<ApplicationUser>)ViewData["SectorMatch"])
-    {
-        <label>@item.Email</label>
-        <br />
-    }
-    <br />
-
-    <label>Practice Match:</label>
-    <br />
-    foreach (var item in (List<ApplicationUser>)ViewData["PracticeMatch"])
-    {
-        <label>@item.Email</label>
-        <br />
-    }
-    <br />
-}
+            @foreach (var item in (List<ApplicationUser>) ViewData["FilteredMembers"])
+            {
+                <tr>
+                    <td>@item.PersonalInfo.FirstName @item.PersonalInfo.LastName</td>
+                    <td>@item.PersonalInfo.HomeAddress</td>
+                    <td>@item.PersonalInfo.CellNum</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
