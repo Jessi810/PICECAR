@@ -188,6 +188,10 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\PICEDatabase.mdf" />
+    <Content Include="App_Data\PICEDatabase_log.ldf">
+      <DependentUpon>PICEDatabase.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap-datetimepicker.css" />
     <Content Include="Content\bootstrap-datetimepicker.min.css" />
     <Content Include="Content\bootstrap-select.css" />
@@ -380,9 +384,7 @@
     <Content Include="Views\Transact\EditMembership.cshtml" />
     <Content Include="Views\Transact\EditChapter.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
